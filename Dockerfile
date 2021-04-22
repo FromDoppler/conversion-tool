@@ -26,12 +26,14 @@ RUN dotnet dotnet-format --check
 RUN dotnet build -c Release
 
 FROM build AS test
+RUN apt-get update && apt-get install wkhtmltopdf -y && rm -rf /var/lib/apt/lists/*
 RUN dotnet test
 
 FROM build AS publish
 RUN dotnet publish "./ConversionTool/ConversionTool.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS final
+RUN apt-get update && apt-get install wkhtmltopdf -y && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 EXPOSE 80
 COPY --from=publish /app/publish .
