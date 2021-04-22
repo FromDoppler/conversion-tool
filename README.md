@@ -1,5 +1,7 @@
 # conversion-tool
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
 Tool for convert content from a format to another format.
 
 Started from a [basic template](https://github.com/FromDoppler/hello-microservice/tree/ffdb5816fe6a7d8a3b75347597e344733e12762d) for a Doppler microservice based on .NET with CI, CD, Code Formatting, Authentication, and other common practices in Doppler teams.
