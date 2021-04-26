@@ -262,5 +262,35 @@ namespace ConversionTool
             // Assert
             Assert.Equal(expectedStatusCode, response.StatusCode);
         }
+
+        [Theory]
+        [InlineData("/html-to-image/png", TOKEN_EMPTY, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/html-to-image/png", TOKEN_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/html-to-image/png", TOKEN_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/html-to-image/png", TOKEN_BROKEN, HttpStatusCode.Unauthorized, "invalid_token", "")]
+        [InlineData("/html-to-image/png", TOKEN_SUPERUSER_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/html-to-image/png", TOKEN_SUPERUSER_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        [InlineData("/html-to-image/png", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20961002, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token has no expiration\"")]
+        [InlineData("/html-to-image/png", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20010908, HttpStatusCode.Unauthorized, "invalid_token", "error_description=\"The token expired at")]
+        public async Task POST_authenticated_endpoints_should_require_a_valid_token(string url, string token, HttpStatusCode expectedStatusCode, string error, string extraErrorInfo)
+        {
+            // Arrange
+            var client = _factory.CreateClient(new WebApplicationFactoryClientOptions());
+
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Headers = { { "Authorization", $"Bearer {token}" } }
+            };
+
+            // Act
+            var response = await client.SendAsync(request);
+            _output.WriteLine(response.GetHeadersAsString());
+
+            // Assert
+            Assert.Equal(expectedStatusCode, response.StatusCode);
+            Assert.StartsWith("Bearer", response.Headers.WwwAuthenticate.ToString());
+            Assert.Contains($"error=\"{error}\"", response.Headers.WwwAuthenticate.ToString());
+            Assert.Contains(extraErrorInfo, response.Headers.WwwAuthenticate.ToString());
+        }
     }
 }
