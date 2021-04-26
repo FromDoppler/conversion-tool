@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -252,6 +254,30 @@ namespace ConversionTool
 
             var request = new HttpRequestMessage(HttpMethod.Get, url)
             {
+                Headers = { { "Authorization", $"Bearer {token}" } }
+            };
+
+            // Act
+            var response = await client.SendAsync(request);
+            _output.WriteLine(response.GetHeadersAsString());
+
+            // Assert
+            Assert.Equal(expectedStatusCode, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/html-to-image/png", TOKEN_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/html-to-image/png", TOKEN_SUPERUSER_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/html-to-image/png", TOKEN_SUPERUSER_FALSE_EXPIRE_20330518, HttpStatusCode.OK)]
+        [InlineData("/html-to-image/png", TOKEN_ACCOUNT_123_TEST1_AT_TEST_DOT_COM_EXPIRE_20330518, HttpStatusCode.OK)]
+        public async Task POST_html_to_image_endpoint_should_accept_valid_token(string url, string token, HttpStatusCode expectedStatusCode)
+        {
+            // Arrange
+            var client = _factory.CreateClient(new WebApplicationFactoryClientOptions());
+            var model = new Model.HtmlToImageModel { Html = "<p>html</p>" };
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json"),
                 Headers = { { "Authorization", $"Bearer {token}" } }
             };
 
