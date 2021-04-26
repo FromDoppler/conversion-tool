@@ -1,5 +1,6 @@
 using ConversionTool.HtmlToImage;
 using ConversionTool.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConversionTool.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class HtmlToImageController : ControllerBase
