@@ -5,6 +5,8 @@
 # @base=https://apisint.fromdoppler.net/hello
 # @base=https://apisqa.fromdoppler.net/hello
 
+# Set api key token here
+@Token=
 ###
 GET {{base}}/swagger/index.html
 
