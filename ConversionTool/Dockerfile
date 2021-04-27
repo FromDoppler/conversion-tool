@@ -2,6 +2,8 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 RUN apt-get update && apt-get install wkhtmltopdf -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    curl libxrender1 libfontconfig libxtst6 xz-utils
 WORKDIR /app
 EXPOSE 80
 
