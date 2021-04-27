@@ -22,7 +22,8 @@ namespace ConversionTool
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDopplerSecurity();
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson();
             services.AddSingleton<IHtmlToImage, WkHtmlToImage>();
             services.AddSwaggerGen(c =>
             {
