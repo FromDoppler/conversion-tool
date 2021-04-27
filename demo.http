@@ -29,3 +29,12 @@ Authorization: Bearer {{Token}}
 ###
 GET {{base}}/accounts/test1@test.com/hello
 Authorization: Bearer {{Token}}
+
+###
+POST {{base}}/html-to-image/png
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+   "Html": "<h1>Title</h1><p>this is a paragraph text</p>"
+}
