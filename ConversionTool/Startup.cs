@@ -1,3 +1,4 @@
+using ConversionTool.HtmlToImage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,7 @@ namespace ConversionTool
         {
             services.AddDopplerSecurity();
             services.AddControllers();
+            services.AddSingleton<IHtmlToImage, WkHtmlToImage>();
             services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("Bearer",

@@ -5,6 +5,8 @@
 # @base=https://apisint.fromdoppler.net/hello
 # @base=https://apisqa.fromdoppler.net/hello
 
+# Set api key token here
+@Token=
 ###
 GET {{base}}/swagger/index.html
 
@@ -29,3 +31,12 @@ Authorization: Bearer {{Token}}
 ###
 GET {{base}}/accounts/test1@test.com/hello
 Authorization: Bearer {{Token}}
+
+###
+POST {{base}}/html-to-image/png
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+
+{
+   "Html": "<h1>Title</h1><p>this is a paragraph text</p>"
+}
