@@ -33,7 +33,8 @@ FROM build AS publish
 RUN dotnet publish "./ConversionTool/ConversionTool.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS final
-RUN apt-get update && apt-get install wkhtmltopdf -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install wkhtmltopdf binutils -y && rm -rf /var/lib/apt/lists/*
+RUN strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 WORKDIR /app
 EXPOSE 80
 COPY --from=publish /app/publish .
