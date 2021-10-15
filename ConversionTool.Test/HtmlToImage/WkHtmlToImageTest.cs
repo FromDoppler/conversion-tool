@@ -16,7 +16,6 @@ namespace ConversionTool.HtmlToImage
             _appConfig = new Mock<IAppConfiguration>();
             _appConfig.Setup(x => x.ImageSizeResult).Returns(new ImageSizeResult
             {
-                Width = 256,
                 Height = 341
             });
         }
