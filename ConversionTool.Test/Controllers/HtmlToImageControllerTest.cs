@@ -20,7 +20,7 @@ namespace ConversionTool.Controllers
             var htmlAsByteArray = fixture.Create<byte[]>();
 
             var htmlToImageMock = new Mock<IHtmlToImage>();
-            htmlToImageMock.Setup(x => x.FromStringToPngAsync(html))
+            htmlToImageMock.Setup(x => x.FromStringToPngAsync(html, null, null))
                 .ReturnsAsync(htmlAsByteArray);
 
             var sut = new HtmlToImageController(
