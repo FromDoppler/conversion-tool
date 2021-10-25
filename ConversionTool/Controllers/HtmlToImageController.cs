@@ -29,7 +29,7 @@ namespace ConversionTool.Controllers
             {
                 _logger.LogInformation("Converting HTML to PNG image");
 
-                var imageAsBytes = await _htmlToImage.FromStringToPngAsync(htmlToImageModel.Html);
+                var imageAsBytes = await _htmlToImage.FromStringToPngAsync(htmlToImageModel.Html, htmlToImageModel.Height, htmlToImageModel.Width);
 
                 return File(imageAsBytes, "image/png");
             }

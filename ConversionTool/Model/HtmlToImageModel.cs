@@ -6,5 +6,7 @@ namespace ConversionTool.Model
     {
         [Required]
         public string Html { get; set; }
+        public int? Height { get; set; }
+        public int? Width { get; set; }
     }
 }
