@@ -30,7 +30,7 @@ RUN dotnet test
 FROM build AS publish
 RUN dotnet publish "./ConversionTool/ConversionTool.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0.4-bullseye-slim AS final
+FROM mcr.microsoft.com/dotnet/aspnet:6.0.8-bullseye-slim AS final
 RUN apt-get update && apt-get install wkhtmltopdf binutils -y && rm -rf /var/lib/apt/lists/*
 RUN strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 WORKDIR /app
