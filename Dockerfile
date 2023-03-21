@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ./*.sh ./
 RUN shellcheck -e SC1091,SC1090 ./*.sh
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0.202-bullseye-slim AS restore
+FROM mcr.microsoft.com/dotnet/sdk:7.0.202-bullseye-slim AS restore
 WORKDIR /src
 COPY ./*.sln ./
 COPY */*.csproj ./
@@ -30,7 +30,7 @@ RUN dotnet test
 FROM build AS publish
 RUN dotnet publish "./ConversionTool/ConversionTool.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0.4-bullseye-slim AS final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0.4-bullseye-slim AS final
 RUN apt-get update && apt-get install wkhtmltopdf binutils -y && rm -rf /var/lib/apt/lists/*
 RUN strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 WORKDIR /app
