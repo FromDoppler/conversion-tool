@@ -19,4 +19,6 @@ RUN dotnet publish "ConversionTool.csproj" -c Release -o /app/publish /p:UseAppH
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ARG version=unknown
+RUN echo $version > /app/wwwroot/version.txt
 ENTRYPOINT ["dotnet", "ConversionTool.dll"]

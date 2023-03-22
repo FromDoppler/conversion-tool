@@ -39,4 +39,4 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           dry: True
-          prettier_options: --check **/**
+          prettier_options: --check **/*.{html,css,scss,less,js,ts,md,yml,yaml,json}
