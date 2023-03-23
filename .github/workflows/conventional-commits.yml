@@ -1,0 +1,15 @@
+name: Conventional Commits
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: Verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Conventional Commits Validator
+        uses: ahmadnassri/action-commit-lint@v1
