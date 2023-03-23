@@ -46,7 +46,7 @@ If you prefer to run these commands without docker, you can read [Dockerfile](./
 
 - Format validation, build and test run in CI process.
 
-- Generation of the docker images following Doppler convention and publish them to Docker Hub (See [build-n-publish.sh](./build-n-publish.sh)).
+- Generation of the docker images following Doppler convention and publish them to Docker Hub (See [build-n-publish.sh](./build-n-publish.sh)) and to Github Packages (See [Github Action](./.git/docker-continuous-delivery.yml))
 
 - Generation of `version.txt` file with the image version in `wwwroot`. Also, expose it using _static files_ middleware.
 
