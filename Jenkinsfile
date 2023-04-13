@@ -34,7 +34,7 @@ pipeline {
         stage('Publish in dopplerdock') {
             environment {
                 DOCKER_CREDENTIALS_ID = "dockerhub_dopplerdock"
-                DOCKER_IMAGE_NAME = "dopplerdock/conversion-tool${PACKAGE_SUFFIX}"
+                DOCKER_IMAGE_NAME = "dopplerdock/conversion-tool"
             }
             stages {
                 stage('Publish pre-release images from pull request') {
