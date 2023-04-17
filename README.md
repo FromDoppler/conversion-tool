@@ -8,9 +8,9 @@ Started from a [basic template](https://github.com/FromDoppler/hello-microservic
 
 ## Context
 
-We base our CI/CD process on Jenkins, Docker Hub, and Docker Swarm.
+We base our CI/CD process on GitHub Actions and Packages, Docker Hub, and Docker Swarm.
 
-Jenkins generates the images based on [doppler-jenkins-ci.groovy](./doppler-jenkins-ci.groovy) (a renamed Jenkisfile). We refer to these generated images in a Docker Swarm using an _auto-redeploy_ approach. The [Doppler Swarm repository](https://github.com/MakingSense/doppler-swarm) stores the configuration of our Docker Swarm.
+GitHub Action generates the images. We refer to these generated images in a Docker Swarm using an _auto-redeploy_ approach. The [Doppler Swarm repository](https://github.com/MakingSense/doppler-swarm) stores the configuration of our Docker Swarm.
 
 You can find a detailed description of our Git flow and the relation with Docker Hub in the following:
 
@@ -22,12 +22,6 @@ You can find a detailed description of our Git flow and the relation with Docker
 
 - Tagging with the format `v#.#.#` generates images with tags like `v1`, `v1.3`, `v1.3.0`, `v1.3.0_982c388`. In general, our Production environment refers to images with tags like `v1` (only the mayor), so, depends on that, these images could be deployed automatically to the Production environment.
 
-## Run validations in local environment
-
-The source of truth related to the build process is [doppler-jenkins-ci.groovy](./doppler-jenkins-ci.groovy) (a renamed Jenkisfile). It basically runs docker build, so, you can reproduce jenkins' build process running `docker build .` or `sh ./verify-w-docker.sh`.
-
-If you prefer to run these commands without docker, you can read [Dockerfile](./Dockerfile) and follow the steps manually.
-
 ## Features
 
 - Base conventions for a .NET/C# project.
@@ -38,7 +32,7 @@ If you prefer to run these commands without docker, you can read [Dockerfile](./
 
 - Prettier validation for all supported files.
 
-- Editor Config validation using `dotnet-format` and `eclint`.
+- Editor Config validation using `dotnet-format`
 
 - Launch and debug settings for VS Code ([.vscode](./.vscode)) and Visual Studio ([launchSettings.json](./Doppler.HelloMicroserver/../ConversionTool/Properties/launchSettings.json)).
 
@@ -46,7 +40,7 @@ If you prefer to run these commands without docker, you can read [Dockerfile](./
 
 - Format validation, build and test run in CI process.
 
-- Generation of the docker images following Doppler convention and publish them to Docker Hub (See [build-n-publish.sh](./build-n-publish.sh)) and to Github Packages (See [Github Action](./.git/docker-continuous-delivery.yml))
+- Generation of the docker images following Doppler convention and publish them to Docker Hub and to Github Packages
 
 - Generation of `version.txt` file with the image version in `wwwroot`. Also, expose it using _static files_ middleware.
 
