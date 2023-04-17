@@ -1,0 +1,22 @@
+name: FromDoppler
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main", "INT"]
+    tags:
+      - v*.*.*
+
+jobs:
+  dotnet:
+    name: .NET
+    uses: FromDoppler/.github/.github/workflows/dotnet.yml@main
+  docker:
+    if: ${{ github.event_name == 'push' }}
+    name: Docker
+    uses: FromDoppler/.github/.github/workflows/continuous-delivery-dockerfile.yml@main
+    secrets: inherit
+    with:
+      dockerfile-path: "ConversionTool/Dockerfile"
+      dockerhub-image-name: "conversion-tool"
