@@ -11,7 +11,7 @@ on:
 jobs:
   dotnet:
     name: .NET
-    uses: FromDoppler/.github/.github/workflows/dotnet.yml@main
+    uses: ./.github/workflows/dotnet.yml
   docker:
     if: ${{ github.event_name == 'push' }}
     name: Docker
