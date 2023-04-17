@@ -10,7 +10,7 @@ Started from a [basic template](https://github.com/FromDoppler/hello-microservic
 
 We base our CI/CD process on Jenkins, Docker Hub, and Docker Swarm.
 
-Jenkins generates the images based on [.doppler-ci](./.doppler-ci) (a symlink to [Jenkisfile](./Jenkinsfile)). We refer to these generated images in a Docker Swarm using an _auto-redeploy_ approach. The [Doppler Swarm repository](https://github.com/MakingSense/doppler-swarm) stores the configuration of our Docker Swarm.
+Jenkins generates the images based on [doppler-jenkins-ci.groovy](./doppler-jenkins-ci.groovy) (a renamed Jenkisfile). We refer to these generated images in a Docker Swarm using an _auto-redeploy_ approach. The [Doppler Swarm repository](https://github.com/MakingSense/doppler-swarm) stores the configuration of our Docker Swarm.
 
 You can find a detailed description of our Git flow and the relation with Docker Hub in the following:
 
@@ -24,7 +24,7 @@ You can find a detailed description of our Git flow and the relation with Docker
 
 ## Run validations in local environment
 
-The source of truth related to the build process is [.doppler-ci](./.doppler-ci) (a symlink to [Jenkisfile](./Jenkinsfile)). It basically runs docker build, so, you can reproduce jenkins' build process running `docker build .` or `sh ./verify-w-docker.sh`.
+The source of truth related to the build process is [doppler-jenkins-ci.groovy](./doppler-jenkins-ci.groovy) (a renamed Jenkisfile). It basically runs docker build, so, you can reproduce jenkins' build process running `docker build .` or `sh ./verify-w-docker.sh`.
 
 If you prefer to run these commands without docker, you can read [Dockerfile](./Dockerfile) and follow the steps manually.
 
