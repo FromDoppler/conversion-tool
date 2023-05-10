@@ -36,7 +36,7 @@ namespace ConversionTool.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Error converting HTML text to PNG image", ex);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
     }
