@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ConversionTool/bin/Debug/net5.0/ConversionTool.dll",
+            "program": "${workspaceFolder}/ConversionTool/bin/Debug/net7.0/ConversionTool.dll",
             "args": [],
             "cwd": "${workspaceFolder}/ConversionTool",
             "stopAtEntry": false,
