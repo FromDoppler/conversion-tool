@@ -11,7 +11,7 @@ namespace ConversionTool.HtmlToImage
 {
     public class WkHtmlToImage : IHtmlToImage
     {
-        IAppConfiguration _appConfiguration;
+        readonly IAppConfiguration _appConfiguration;
         public WkHtmlToImage(IAppConfiguration appConfiguration)
         {
             _appConfiguration = appConfiguration;
