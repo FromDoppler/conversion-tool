@@ -31,18 +31,14 @@ namespace ConversionTool.HtmlToImage
 
         private byte[] ResizeImage(byte[] image, int? height, int? width)
         {
-            using (Image imageRgba = Image.Load(image))
-            {
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    var withToMutate = width ?? imageRgba.Width * _appConfiguration.ImageSizeResult.Height / imageRgba.Height;
-                    var heightToMutate = height ?? _appConfiguration.ImageSizeResult.Height;
+            using Image imageRgba = Image.Load(image);
+            using MemoryStream stream = new MemoryStream();
+            var withToMutate = width ?? imageRgba.Width * _appConfiguration.ImageSizeResult.Height / imageRgba.Height;
+            var heightToMutate = height ?? _appConfiguration.ImageSizeResult.Height;
 
-                    imageRgba.Mutate(x => x.Resize(withToMutate, heightToMutate, KnownResamplers.Lanczos3));
-                    imageRgba.Save(stream, new PngEncoder());
-                    return stream.ToArray();
-                }
-            }
+            imageRgba.Mutate(x => x.Resize(withToMutate, heightToMutate, KnownResamplers.Lanczos3));
+            imageRgba.Save(stream, new PngEncoder());
+            return stream.ToArray();
         }
     }
 }
