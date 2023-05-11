@@ -3,7 +3,6 @@ using ConversionTool.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace ConversionTool.Controllers
@@ -25,19 +24,11 @@ namespace ConversionTool.Controllers
         [HttpPost("/html-to-image/png")]
         public async Task<IActionResult> Png([FromBody] HtmlToImageModel htmlToImageModel)
         {
-            try
-            {
-                _logger.LogInformation("Converting HTML to PNG image");
+            _logger.LogInformation("Converting HTML to PNG image");
 
-                var imageAsBytes = await _htmlToImage.FromStringToPngAsync(htmlToImageModel.Html, htmlToImageModel.Height, htmlToImageModel.Width);
+            var imageAsBytes = await _htmlToImage.FromStringToPngAsync(htmlToImageModel.Html, htmlToImageModel.Height, htmlToImageModel.Width);
 
-                return File(imageAsBytes, "image/png");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error converting HTML text to PNG image", ex);
-                return BadRequest(ex);
-            }
+            return File(imageAsBytes, "image/png");
         }
     }
 }
