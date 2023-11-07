@@ -19,4 +19,4 @@ jobs:
     secrets: inherit
     with:
       dockerfile-path: "ConversionTool/Dockerfile"
-      dockerhub-image-name: "conversion-tool"
+      docker-image-name: "conversion-tool"
