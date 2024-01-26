@@ -9,6 +9,9 @@ on:
       - v*.*.*
 
 jobs:
+  fromdoppler:
+    name: Conventions
+    uses: FromDoppler/.github/.github/workflows/conventions.yml@main
   dotnet:
     name: .NET
     uses: ./.github/workflows/dotnet.yml
